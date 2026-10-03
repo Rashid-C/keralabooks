@@ -1,0 +1,13 @@
+node_modules
+
+.env
+.env.*
+!.env.example
+
+.next
+.turbo
+.expo
+dist
+
+Thumbs.db
+.DS_Store
