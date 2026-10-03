@@ -1,0 +1,7 @@
+{
+  "name": "@keralabooks/config",
+  "private": true,
+  "exports": {
+    "./tsconfig/base.json": "./tsconfig/base.json"
+  }
+}
