@@ -12,10 +12,15 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.24.0",
+      "version": "12.8.1",
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@11.24.0",
-  "type": "module"
+  "packageManager": "pnpm@12.8.1",
+  "type": "module",
+  "devDependencies": {
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "turbo": "^2.11.7",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
+  }
 }
