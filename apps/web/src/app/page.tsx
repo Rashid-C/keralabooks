@@ -11,6 +11,7 @@ const roleLabels = {
 export default async function HomePage() {
   const user = await getCurrentUser();
   if (!user) redirect('/login');
+  if (user.role === 'super_admin') redirect('/admin');
 
   return (
     <main className="min-h-dvh">

@@ -1,4 +1,5 @@
 import 'server-only';
+import { notFound, redirect } from 'next/navigation';
 import { cache } from 'react';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
@@ -35,3 +36,10 @@ export const getCurrentUser = cache(async (): Promise<CurrentUser | null> => {
     shopId: c.shop_id ?? null,
   };
 });
+
+export async function requireRole(...roles: CurrentUser['role'][]): Promise<CurrentUser> {
+  const user = await getCurrentUser();
+  if (!user) redirect('/login');
+  if (!roles.includes(user.role)) notFound();
+  return user;
+}
