@@ -187,6 +187,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@keralabooks/db-types':
+        specifier: workspace:*
+        version: link:../../packages/db-types
       '@supabase/ssr':
         specifier: ^0.12.7
         version: 0.12.7(@supabase/supabase-js@2.117.2)
@@ -232,6 +235,8 @@ importers:
         version: 4.3.3
 
   packages/config: {}
+
+  packages/db-types: {}
 
   packages/domain:
     devDependencies:
