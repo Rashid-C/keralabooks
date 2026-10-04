@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { z } from 'zod';
 import { requireRole } from '@/lib/auth';
 import { createClient } from '@/lib/supabase/server';
@@ -73,7 +74,12 @@ export default async function BusinessPage({ params }: PageProps<'/admin/busines
                   <p className="font-medium">{shop.name}</p>
                   <p className="mt-0.5 font-mono text-sm text-muted">{shop.shop_code}</p>
                 </div>
-                <span className="text-xs uppercase tracking-wide text-muted">{shop.status}</span>
+                                <Link
+                  href={`/s/${shop.shop_code}`}
+                  className="text-sm font-medium text-primary hover:underline"
+                >
+                  Open workspace →
+                </Link>
               </li>
             ))}
           </ul>
