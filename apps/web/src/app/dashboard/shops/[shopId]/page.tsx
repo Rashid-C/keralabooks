@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { z } from 'zod';
 import { requireRole } from '@/lib/auth';
@@ -30,6 +31,12 @@ export default async function ShopPage({ params }: PageProps<'/dashboard/shops/[
       <p className="text-sm text-muted">Shop</p>
       <h1 className="font-display text-3xl font-semibold">{shop.name}</h1>
       <p className="mt-1 font-mono text-sm text-muted">{shop.shop_code}</p>
+      <Link
+        href={`/dashboard/shops/${shop.id}/products`}
+        className="mt-4 inline-block text-sm font-medium text-primary hover:underline"
+      >
+        Manage items →
+      </Link>
 
       <section className="mt-10">
         <h2 className="text-lg font-semibold">Staff</h2>
