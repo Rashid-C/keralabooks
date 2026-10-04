@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./money": "./src/money.ts"
-  },
+  "./money": "./src/money.ts",
+  "./dates": "./src/dates.ts"
+},
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
