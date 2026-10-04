@@ -1,4 +1,4 @@
-import { todayIn } from '@keralabooks/domain/dates';
+import { formatDate, todayIn } from '@keralabooks/domain/dates';
 import { formatINR, type Paise } from '@keralabooks/domain/money';
 import { requireRole } from '@/lib/auth';
 import { getShop } from '@/lib/shop';
@@ -61,7 +61,7 @@ export async function EntriesPage({ shopCode, type }: { shopCode: string; type: 
             <tbody className="divide-y divide-border">
               {entriesResult.data.map((e) => (
                 <tr key={e.id} className="transition hover:bg-background">
-                  <td className="px-5 py-3.5 tabular-nums text-muted">{e.entry_date}</td>
+                  <td className="px-5 py-3.5 tabular-nums text-muted">{formatDate(e.entry_date)}</td>
                   <td className="px-5 py-3.5 font-medium">{e.party?.name}</td>
                   <td className="px-5 py-3.5 text-muted">{e.bill_no ?? '—'}</td>
                   <td className="px-5 py-3.5 text-muted">{e.creator?.display_name}</td>

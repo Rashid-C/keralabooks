@@ -19,3 +19,16 @@ export function todayIn(timeZone: string, now: Date = new Date()): string {
   const part = (type: string) => parts.find((p) => p.type === type)?.value;
   return `${part('year')}-${part('month')}-${part('day')}`;
 }
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
+
+export function formatDate(isoDate: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate);
+  if (!match) throw new Error(`Invalid date: ${isoDate}`);
+
+  const [, year, month, day] = match;
+  const monthName = MONTHS[Number(month) - 1];
+  if (!monthName) throw new Error(`Invalid month: ${isoDate}`);
+
+  return `${day} ${monthName} ${year}`;
+}
