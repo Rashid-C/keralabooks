@@ -18,6 +18,7 @@
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
+    "db:types": "supabase gen types typescript --local > packages/db-types/src/database.ts",
     "create-super-admin": "node --env-file=.env.local scripts/create-super-admin.mts"
   },
   "devDependencies": {
