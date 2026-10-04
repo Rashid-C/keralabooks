@@ -1,6 +1,6 @@
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(3);
+select plan(4);
 
 -- Fixtures: test data, created as the superuser
 insert into public.businesses (id, name) values
@@ -44,6 +44,18 @@ select results_eq(
   'select name from public.shops order by name',
   $$values ('Areekode'), ('Kavanoor')$$,
   'owner sees both their shops, but not other businesses'
+);
+
+-- Test 4: Ameen after being deactivated
+reset role;
+update public.profiles set is_active = false
+where id = 'e0000000-0000-0000-0000-000000000001';
+
+set local role authenticated;
+select set_config('request.jwt.claims', '{"sub":"e0000000-0000-0000-0000-000000000001"}', true);
+select is_empty(
+  'select * from public.shops',
+  'deactivated employee sees no shops, even with a valid token'
 );
 
 select * from finish();
