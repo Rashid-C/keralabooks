@@ -1,17 +1,18 @@
-import { redirect } from 'next/navigation';
-import { getCurrentUser } from '@/lib/auth';
-import { signOut } from '@/lib/auth-actions';
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
+import { signOut } from "@/lib/auth-actions";
 
 const roleLabels = {
-  super_admin: 'Super admin',
-  admin: 'Owner',
-  employee: 'Staff',
+  super_admin: "Super admin",
+  admin: "Owner",
+  employee: "Staff",
 } as const;
 
 export default async function HomePage() {
   const user = await getCurrentUser();
-  if (!user) redirect('/login');
-  if (user.role === 'super_admin') redirect('/admin');
+  if (!user) redirect("/login");
+  if (user.mustChangePassword) redirect("/change-password");
+  if (user.role === "super_admin") redirect("/admin");
 
   return (
     <main className="min-h-dvh">
