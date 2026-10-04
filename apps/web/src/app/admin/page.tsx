@@ -35,14 +35,19 @@ export default async function AdminHomePage() {
       ) : (
         <ul className="mt-8 space-y-3">
           {businesses.map((b) => (
-            <li key={b.id} className="rounded-2xl border border-border bg-surface p-5">
-              <div className="flex items-center justify-between">
-                <p className="font-medium">{b.name}</p>
-                <span className="text-xs uppercase tracking-wide text-muted">{b.status}</span>
-              </div>
-              <p className="mt-1 text-sm text-muted">
-                {b.shops.length === 0 ? 'No shops yet' : b.shops.map((s) => s.name).join(' · ')}
-              </p>
+                        <li key={b.id}>
+              <Link
+                href={`/admin/businesses/${b.id}`}
+                className="block rounded-2xl border border-border bg-surface p-5 transition hover:border-primary/40"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="font-medium">{b.name}</p>
+                  <span className="text-xs uppercase tracking-wide text-muted">{b.status}</span>
+                </div>
+                <p className="mt-1 text-sm text-muted">
+                  {b.shops.length === 0 ? 'No shops yet' : b.shops.map((s) => s.name).join(' · ')}
+                </p>
+              </Link>
             </li>
           ))}
         </ul>
