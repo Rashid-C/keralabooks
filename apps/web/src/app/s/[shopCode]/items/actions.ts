@@ -27,7 +27,7 @@ export async function createProduct(
   _prev: ProductFormState,
   formData: FormData,
 ): Promise<ProductFormState> {
-  await requireRole("admin");
+  await requireRole("super_admin", "admin");
   if (!z.uuid().safeParse(shopId).success) return { error: "Invalid shop" };
 
   const parsed = productSchema.safeParse({
