@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatINR, lineTotal, toPaise } from './money';
+import { formatINR, lineTotal, toPaise ,sumPaise} from './money';
 
 describe('toPaise', () => {
   it('converts rupees to paise exactly', () => {
@@ -39,5 +39,16 @@ describe('lineTotal', () => {
     expect(() => lineTotal(0, toPaise('50'))).toThrow();
     expect(() => lineTotal(-2, toPaise('50'))).toThrow();
     expect(() => lineTotal(Number.NaN, toPaise('50'))).toThrow();
+  });
+});
+
+describe('sumPaise', () => {
+  it('adds line totals into a bill total', () => {
+    const lines = [toPaise('100'), toPaise('25.50'), toPaise('0.50')];
+    expect(sumPaise(lines)).toBe(12600);
+  });
+
+  it('returns zero for an empty bill', () => {
+    expect(sumPaise([])).toBe(0);
   });
 });

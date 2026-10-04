@@ -23,3 +23,7 @@ export function lineTotal(qty: number, rate: Paise): Paise {
   }
   return Math.round(qty * rate) as Paise;
 }
+
+export function sumPaise(amounts: readonly Paise[]): Paise {
+  return amounts.reduce((total, amount) => total + amount, 0) as Paise;
+}
