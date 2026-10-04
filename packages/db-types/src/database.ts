@@ -254,7 +254,10 @@ isOneToOne: true
             [_ in never]: never
           }
           Functions: {
-            "custom_access_token_hook":
+            "create_entry":
+{ Args: { "p_amount_paise": number,"p_bill_no": string,"p_entry_date": string,"p_items": Json,"p_note": string,"p_party_id": string,"p_shop_id": string,"p_type": Database["public"]['Enums']["entry_type"] }; Returns: string
+                           },
+"custom_access_token_hook":
 { Args: { "event": Json }; Returns: Json
                            }
           }
