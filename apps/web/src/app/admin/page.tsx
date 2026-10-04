@@ -35,7 +35,7 @@ export default async function AdminHomePage() {
       ) : (
         <ul className="mt-8 space-y-3">
           {businesses.map((b) => (
-                        <li key={b.id}>
+            <li key={b.id}>
               <Link
                 href={`/admin/businesses/${b.id}`}
                 className="block rounded-2xl border border-border bg-surface p-5 transition hover:border-primary/40"

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { z } from 'zod';
 import { requireRole } from '@/lib/auth';
 import { createClient } from '@/lib/supabase/server';
+import { AddShopForm } from './add-shop-form';
 
 export default async function BusinessPage({ params }: PageProps<'/admin/businesses/[businessId]'>) {
   await requireRole('super_admin');
@@ -42,6 +43,10 @@ export default async function BusinessPage({ params }: PageProps<'/admin/busines
           ))}
         </ul>
       )}
+            <h2 className="mt-10 text-lg font-semibold">Add a shop</h2>
+      <div className="mt-4 rounded-2xl border border-border bg-surface p-6">
+        <AddShopForm businessId={business.id} />
+      </div>
     </div>
   );
 }
