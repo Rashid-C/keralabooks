@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { toPaise } from './money';
+import { formatINR, toPaise } from './money';
 
 describe('toPaise', () => {
   it('converts rupees to paise exactly', () => {
@@ -12,5 +12,12 @@ describe('toPaise', () => {
     expect(() => toPaise('abc')).toThrow();
     expect(() => toPaise('-5')).toThrow();
     expect(() => toPaise('1.234')).toThrow();
+  });
+});
+
+describe('formatINR', () => {
+  it('formats paise as Indian rupees', () => {
+    expect(formatINR(toPaise('125000'))).toBe('₹1,25,000.00');
+    expect(formatINR(toPaise('0.5'))).toBe('₹0.50');
   });
 });
