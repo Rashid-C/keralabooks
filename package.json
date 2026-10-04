@@ -1,17 +1,8 @@
 {
-  "name": "KeralaBooks",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "typecheck": "turbo run typecheck",
-    "test": "turbo run test"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "keralabooks",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.8.1",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
@@ -19,9 +10,19 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.8.1",
-  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "create-super-admin": "node --env-file=.env.local scripts/create-super-admin.mts"
+  },
   "devDependencies": {
+    "@inquirer/prompts": "^8.7.2",
+    "@supabase/supabase-js": "^2.117.2",
     "@typescript/native": "npm:typescript@^7.0.2",
     "supabase": "^2.119.0",
     "turbo": "^2.11.7",
