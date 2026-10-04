@@ -125,13 +125,13 @@ isOneToOne: false
                   ]
                 },"parties": {
                   Row: {
-                    "created_at": string,"created_by": string,"deleted_at": string | null,"id": string,"kind": Database["public"]['Enums']["party_kind"],"name": string,"phone": string | null,"shop_id": string,"updated_at": string,"updated_by": string | null
+                    "created_at": string,"created_by": string,"deleted_at": string | null,"id": string,"name": string,"phone": string | null,"shop_id": string,"updated_at": string,"updated_by": string | null
                   }
                   Insert: {
-                    "created_at"?: string,"created_by"?: string,"deleted_at"?: string | null,"id"?: string,"kind"?: Database["public"]['Enums']["party_kind"],"name": string,"phone"?: string | null,"shop_id": string,"updated_at"?: string,"updated_by"?: string | null
+                    "created_at"?: string,"created_by"?: string,"deleted_at"?: string | null,"id"?: string,"name": string,"phone"?: string | null,"shop_id": string,"updated_at"?: string,"updated_by"?: string | null
                   }
                   Update: {
-                    "created_at"?: string,"created_by"?: string,"deleted_at"?: string | null,"id"?: string,"kind"?: Database["public"]['Enums']["party_kind"],"name"?: string,"phone"?: string | null,"shop_id"?: string,"updated_at"?: string,"updated_by"?: string | null
+                    "created_at"?: string,"created_by"?: string,"deleted_at"?: string | null,"id"?: string,"name"?: string,"phone"?: string | null,"shop_id"?: string,"updated_at"?: string,"updated_by"?: string | null
                   }
                   Relationships: [
                     {
@@ -259,7 +259,7 @@ isOneToOne: true
                            }
           }
           Enums: {
-            "app_role": "super_admin"|"admin"|"employee","business_status": "active"|"suspended","entry_type": "sale"|"purchase","party_kind": "customer"|"supplier"|"both","product_unit": "pcs"|"kg"|"g"|"litre"|"ml"|"dozen"|"box"|"packet"|"tray","shop_status": "active"|"inactive"
+            "app_role": "super_admin"|"admin"|"employee","business_status": "active"|"suspended","entry_type": "sale"|"purchase","product_unit": "pcs"|"kg"|"g"|"litre"|"ml"|"dozen"|"box"|"packet"|"tray","shop_status": "active"|"inactive"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -379,7 +379,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "app_role": ["super_admin", "admin", "employee"],"business_status": ["active", "suspended"],"entry_type": ["sale", "purchase"],"party_kind": ["customer", "supplier", "both"],"product_unit": ["pcs", "kg", "g", "litre", "ml", "dozen", "box", "packet", "tray"],"shop_status": ["active", "inactive"]
+            "app_role": ["super_admin", "admin", "employee"],"business_status": ["active", "suspended"],"entry_type": ["sale", "purchase"],"product_unit": ["pcs", "kg", "g", "litre", "ml", "dozen", "box", "packet", "tray"],"shop_status": ["active", "inactive"]
           }
         }
 } as const
