@@ -14,20 +14,18 @@
   --danger: oklch(0.55 0.2 27);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --background: oklch(0.17 0.008 55);
-    --surface: oklch(0.21 0.01 55);
-    --foreground: oklch(0.95 0.008 75);
-    --muted: oklch(0.7 0.012 65);
-    --border: oklch(0.3 0.01 55);
-    --primary: oklch(0.72 0.12 60);
-    --primary-foreground: oklch(0.17 0.008 55);
-    --sale: oklch(0.72 0.14 155);
-    --purchase: oklch(0.72 0.14 40);
-    --danger: oklch(0.68 0.19 27);
-  }
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: oklch(0.17 0.008 55);
+  --surface: oklch(0.21 0.01 55);
+  --foreground: oklch(0.95 0.008 75);
+  --muted: oklch(0.7 0.012 65);
+  --border: oklch(0.3 0.01 55);
+  --primary: oklch(0.72 0.12 60);
+  --primary-foreground: oklch(0.17 0.008 55);
+  --sale: oklch(0.72 0.14 155);
+  --purchase: oklch(0.72 0.14 40);
+  --danger: oklch(0.68 0.19 27);
 }
 
 @theme inline {
