@@ -21,6 +21,7 @@
     "@types/node": "^24.19.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "^1.0.0",
     "tailwindcss": "^4"
   },
   "packageManager": "pnpm@11.24.0"
