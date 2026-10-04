@@ -176,6 +176,14 @@ importers:
         specifier: npm:@typescript/typescript6@^6.0.2
         version: '@typescript/typescript6@6.0.2'
 
+  packages/config: {}
+
+  packages/domain:
+    devDependencies:
+      '@keralabooks/config':
+        specifier: workspace:*
+        version: link:../config
+
 packages:
 
   '@turbo/darwin-64@2.11.7':
