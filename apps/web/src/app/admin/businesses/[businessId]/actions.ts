@@ -59,3 +59,76 @@ export async function createShop(
   revalidatePath("/admin");
   return { error: null };
 }
+
+const ownerSchema = z.object({
+  displayName: z.string().trim().min(1, 'Enter the owner’s name').max(60, 'At most 60 characters'),
+  username: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .regex(/^[a-z0-9._]{3,30}$/, '3–30 lowercase letters, numbers, dots, or underscores'),
+  email: z.email('Enter a valid email'),
+  password: z.string().min(12, 'At least 12 characters'),
+});
+
+export type OwnerFormState = { error: string | null; success: boolean };
+
+export async function createOwner(
+  businessId: string,
+  _prev: OwnerFormState,
+  formData: FormData,
+): Promise<OwnerFormState> {
+  await requireRole('super_admin');
+  if (!z.uuid().safeParse(businessId).success) return { error: 'Invalid business', success: false };
+
+  const parsed = ownerSchema.safeParse({
+    displayName: formData.get('displayName'),
+    username: formData.get('username'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? 'Check the details', success: false };
+  }
+  const { displayName, username, email, password } = parsed.data;
+
+  const admin = createAdminClient();
+
+  const { data, error: authError } = await admin.auth.admin.createUser({
+    email,
+    password,
+    email_confirm: true,
+  });
+  if (authError) {
+    return {
+      error: authError.code === 'email_exists' ? 'An account with this email already exists.' : 'Could not create the account.',
+      success: false,
+    };
+  }
+  const userId = data.user.id;
+
+  const { error: profileError } = await admin.from('profiles').insert({
+    id: userId,
+    username,
+    display_name: displayName,
+    must_change_password: true,
+  });
+  if (profileError) {
+    await admin.auth.admin.deleteUser(userId);
+    return { error: 'Could not create the profile.', success: false };
+  }
+
+  const { error: roleError } = await admin.from('user_roles').insert({
+    user_id: userId,
+    role: 'admin',
+    business_id: businessId,
+  });
+  if (roleError) {
+    await admin.from('profiles').delete().eq('id', userId);
+    await admin.auth.admin.deleteUser(userId);
+    return { error: 'Could not assign the role.', success: false };
+  }
+
+  revalidatePath(`/admin/businesses/${businessId}`);
+  return { error: null, success: true };
+}
