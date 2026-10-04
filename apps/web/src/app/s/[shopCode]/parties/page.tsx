@@ -23,7 +23,12 @@ export default async function PartiesPage({ params, searchParams }: PageProps<'/
     .is('deleted_at', null)
     .order('name')
     .limit(100);
-  if (q) query = query.ilike('name', `%${q.replace(/[%_\\]/g, '\\$&')}%`);
+  const digits = q.replace(/[\s+-]/g, '');
+  if (/^\d{3,}$/.test(digits)) {
+    query = query.ilike('phone', `%${digits}%`);
+  } else if (q) {
+    query = query.ilike('name', `%${q.replace(/[%_\\]/g, '\\$&')}%`);
+  }
 
   const { data: parties, error } = await query;
   if (error) throw error;
@@ -41,8 +46,8 @@ export default async function PartiesPage({ params, searchParams }: PageProps<'/
         <input
           name="q"
           defaultValue={q}
-          placeholder="Search parties"
-          aria-label="Search parties"
+          placeholder="Search by name or phone"
+          aria-label="Search by name or phone"
           className="h-11 w-full rounded-xl border border-border bg-surface pl-10 pr-4 text-base outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/15"
         />
       </form>
