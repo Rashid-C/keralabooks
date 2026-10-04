@@ -1,0 +1,1 @@
+insert into public.businesses (name) values ('Kerala Bakery') returning *;
