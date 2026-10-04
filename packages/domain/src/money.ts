@@ -16,3 +16,10 @@ const inrFormatter = new Intl.NumberFormat('en-IN', {
 export function formatINR(amount: Paise): string {
   return inrFormatter.format(amount / 100);
 }
+
+export function lineTotal(qty: number, rate: Paise): Paise {
+  if (!Number.isFinite(qty) || qty <= 0) {
+    throw new Error(`Invalid quantity: ${qty}`);
+  }
+  return Math.round(qty * rate) as Paise;
+}
