@@ -4,7 +4,8 @@
   "type": "module",
   "exports": {
     "./money": "./src/money.ts",
-    "./dates": "./src/dates.ts"
+    "./dates": "./src/dates.ts",
+    "./entry": "./src/entry.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -14,5 +15,9 @@
     "@keralabooks/config": "workspace:*",
     "@types/node": "^24.19.1",
     "vitest": "^5.0.3"
+  },
+  "dependencies": {
+    "@keralabooks/db-types": "workspace:*",
+    "zod": "^4.6.5"
   }
 }

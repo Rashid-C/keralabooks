@@ -251,6 +251,13 @@ importers:
   packages/db-types: {}
 
   packages/domain:
+    dependencies:
+      '@keralabooks/db-types':
+        specifier: workspace:*
+        version: link:../db-types
+      zod:
+        specifier: ^4.6.5
+        version: 4.6.5
     devDependencies:
       '@keralabooks/config':
         specifier: workspace:*
