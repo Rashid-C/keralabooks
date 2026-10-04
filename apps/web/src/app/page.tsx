@@ -13,6 +13,7 @@ export default async function HomePage() {
   if (!user) redirect("/login");
   if (user.mustChangePassword) redirect("/change-password");
   if (user.role === "super_admin") redirect("/admin");
+  if (user.role === "admin") redirect("/dashboard");
 
   return (
     <main className="min-h-dvh">
