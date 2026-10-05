@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { requireRole } from "@/lib/auth";
 import { signOut } from "@/lib/auth-actions";
 import { createClient } from "@/lib/supabase/server";
+import { WorkspaceShell } from '@/components/workspace-shell';
 
 export default async function ShopLayout({
   children,
@@ -29,32 +30,23 @@ export default async function ShopLayout({
   if (!shop) notFound();
 
   return (
-    <div className="flex min-h-dvh">
-      <aside className="w-60 shrink-0 border-r border-border bg-surface">
-        <Sidebar
-          shopCode={shop.shop_code}
-          isSuperAdmin={user.role === "super_admin"}
-        />
-      </aside>
-      <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-border bg-surface px-6 py-3">
-          <ShopSwitcher
-            shops={shops.map((s) => ({ code: s.shop_code, name: s.name }))}
-            currentCode={shop.shop_code}
-          />
+    <WorkspaceShell
+      sidebar={<Sidebar shopCode={shop.shop_code} isSuperAdmin={user.role === 'super_admin'} />}
+      topbar={
+        <>
+          <ShopSwitcher shops={shops.map((s) => ({ code: s.shop_code, name: s.name }))} currentCode={shop.shop_code} />
           <div className="flex items-center gap-4">
-            <span className="text-sm text-muted">
-              {profileResult.data?.display_name}
-            </span>
+            <span className="hidden text-sm text-muted sm:inline">{profileResult.data?.display_name}</span>
             <form action={signOut}>
               <Button type="submit" variant="secondary" size="sm">
                 Sign out
               </Button>
             </form>
           </div>
-        </header>
-        <main className="flex-1 px-6 py-8">{children}</main>
-      </div>
-    </div>
+        </>
+      }
+    >
+      {children}
+    </WorkspaceShell>
   );
 }
